@@ -60,7 +60,7 @@ Trace-Stride Hybrid Prefetcher's implementation is in champsim_crc2/prefetcher/h
 * Number of simulation instructions: 10,000,000.
 * Number of signatures for Trace-Stride: 64.
 
-Benchmarking code and results are in benchmarking/ directory.
+Benchmarking code and data results are in benchmarking/ directory.
 
 ### Trace-Stride Hybrid Prefetcher's Performance
 
@@ -68,7 +68,7 @@ Benchmarking code and results are in benchmarking/ directory.
     <img src="img/hybrid_perf.png">
 </p>
 
-## Comparison of different L2C Prefetchers' Performance
+### Comparison of different L2C Prefetchers' Performance
 
 <p align="center">
     <img src="img/comparison.png">
