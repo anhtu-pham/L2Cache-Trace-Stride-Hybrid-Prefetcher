@@ -6,7 +6,7 @@ Data-intensive applications may include regular, consistent stride access patter
 
 ## Overview
 
-Trace-Stride Hybrid Prefetcher performs prefetching for L2 Cache and effectively supports programs with mixture of above patterns. It can dynamically select prefetching mode for each access instruction in the program based on pattern detection over time without causing cache pollution.
+I designed Trace-Stride Hybrid Prefetcher that performs prefetching for L2 Cache and effectively supports programs with mixture of above patterns. It can dynamically select prefetching mode for each access instruction in the program based on pattern detection over time without causing cache pollution.
 
 Trace-Stride Hybrid Prefetcher has 3 prefetching modes: (1) dynamic trace-based prefetching, (2) dynamic stride-based prefetching, (3) no prefetching, along with history memory buffer that stores necessary data and drives the decision of prefetching behaviors.
 
@@ -14,11 +14,15 @@ Trace-Stride Hybrid Prefetcher has 3 prefetching modes: (1) dynamic trace-based 
 
 ### History Memory Buffer
 
+History memory buffer records necessary information for examined instructions to drive determination of prefetching mechanisms and behaviors. It is indexed based on signature of access instruction's address.
+
 <p align="center">
     <img src="img/history_mem_buffer.png">
 </p>
 
 ### Per-entry FSM Counter
+
+Each entry of history memory buffer includes FSM counter to dynamically determine appropriate prefetching mode and corresponding level of trust depending on memory access pattern that current associated access instruction follows over time.
 
 <p align="center">
     <img src="img/FSM.png">
@@ -26,15 +30,23 @@ Trace-Stride Hybrid Prefetcher has 3 prefetching modes: (1) dynamic trace-based 
 
 ### Dynamic Trace-based Prefetcher
 
+For each entry of history memory buffer, dynamic trace-based prefetcher performs prefetching at block offsets in the new accessed page based on the corresponding instruction's access block offsets in the last accessed page.
+
 <p align="center">
     <img src="img/trace_pref.png">
 </p>
 
 ### Dynamic Stride-based Prefetcher
 
+For each entry of history memory buffer, dynamic stride-based prefetcher performs prefetching in strides from the last accessed location of the corresponding instruction.
+
 <p align="center">
     <img src="img/stride_pref.png">
 </p>
+
+## Implementation
+
+Trace-Stride Hybrid Prefetcher's implementation is in champsim_crc2/prefetcher/hybrid.l2c_pref file.
 
 ## Performance Benchmarking
 
@@ -47,6 +59,8 @@ Trace-Stride Hybrid Prefetcher has 3 prefetching modes: (1) dynamic trace-based 
 * Number of warmup instructions: 1,000,000.
 * Number of simulation instructions: 10,000,000.
 * Number of signatures for Trace-Stride: 64.
+
+Benchmarking code and results are in benchmarking/ directory.
 
 ### Trace-Stride Hybrid Prefetcher's Performance
 
