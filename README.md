@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Data-intensive applications may include regular, consistent stride access pattern, consecutively inconsistent and irregular access pattern, random or unrecognizable access patterns, or even mixture from these types of access patterns.
+Data-intensive applications may include regular, consistent stride access pattern, consecutively inconsistent and irregular access pattern, random or unrecognizable access patterns, or even complex mixtures from these types of access patterns.
 
 ## Overview
 
