@@ -64,8 +64,9 @@ To test with different L2C prefetchers, use the following commands:
 ```
 cd champsim_crc2
 chmod +x run.sh
-./run.sh {L2C prefetcher name}    // {L2C prefetcher name} is one of the following: no (baseline), ip_stride, kpcp, hybrid (Trace-Stride Hybrid Prefetcher).
+./run.sh {L2C prefetcher name}
 ```
+{L2C prefetcher name} is one of the following: no (baseline), ip_stride, kpcp, hybrid (Trace-Stride Hybrid Prefetcher).
 
 Benchmarking code and data results are in benchmarking/ directory.
 
