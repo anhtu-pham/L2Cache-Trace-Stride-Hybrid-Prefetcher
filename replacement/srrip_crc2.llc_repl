@@ -1,0 +1,69 @@
+////////////////////////////////////////////
+//                                        //
+//     SRRIP [Jaleel et al. ISCA'10]      //
+//     CRC2 API version                   //
+//                                        //
+////////////////////////////////////////////
+
+#include "crc2_wrapper.h"
+
+// Define cache parameters
+#define LLC_SETS LLC_SET
+#define LLC_WAYS LLC_WAY
+
+// RRPV parameters
+#define maxRRPV 3
+
+// RRPV state array
+uint32_t rrpv[LLC_SETS][LLC_WAYS];
+
+// Initialize replacement state
+void InitReplacementState() {
+    cout << "Initialize SRRIP state (CRC2 API)" << endl;
+
+    for (int i = 0; i < LLC_SETS; i++) {
+        for (int j = 0; j < LLC_WAYS; j++) {
+            rrpv[i][j] = maxRRPV;
+        }
+    }
+}
+
+// Find replacement victim
+uint32_t GetVictimInSet(uint32_t cpu, uint32_t set, const BLOCK *current_set,
+                        uint64_t PC, uint64_t paddr, uint32_t type) {
+    // Look for the maxRRPV line
+    while (1) {
+        for (int i = 0; i < LLC_WAYS; i++) {
+            if (rrpv[set][i] == maxRRPV) {
+                return i;
+            }
+        }
+
+        // Increment all RRPV values
+        for (int i = 0; i < LLC_WAYS; i++) {
+            rrpv[set][i]++;
+        }
+    }
+
+    // Should never reach here
+    assert(0);
+    return 0;
+}
+
+// Called on every cache hit and cache fill
+void UpdateReplacementState(uint32_t cpu, uint32_t set, uint32_t way,
+                            uint64_t paddr, uint64_t PC, uint64_t victim_addr,
+                            uint32_t type, uint8_t hit) {
+    if (hit) {
+        rrpv[set][way] = 0;
+    } else {
+        rrpv[set][way] = maxRRPV - 1;
+    }
+}
+
+// Print stats
+void PrintStats_Heartbeat() {
+}
+
+void PrintStats() {
+}

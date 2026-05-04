@@ -1,0 +1,14 @@
+# Compiled binaries
+bin/
+obj/
+
+# Backup files
+*.bak
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor files
+*.swp
+*~

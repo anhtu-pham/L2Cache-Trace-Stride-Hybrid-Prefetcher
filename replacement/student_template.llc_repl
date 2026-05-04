@@ -1,0 +1,132 @@
+////////////////////////////////////////////
+//                                        //
+//     Student Replacement Policy         //
+//     Template for CRC2 Assignment       //
+//                                        //
+//     Replace this header with your      //
+//     name and policy description        //
+//                                        //
+////////////////////////////////////////////
+
+#include "crc2_wrapper.h"
+
+// ============================================
+// Define cache parameters (DO NOT MODIFY)
+// ============================================
+#define LLC_SETS LLC_SET  // Number of sets in LLC (2048 for single-core, 8192 for 4-core)
+#define LLC_WAYS LLC_WAY  // Number of ways in LLC (16)
+
+// ============================================
+// Add your global data structures here
+// ============================================
+
+// Example: RRPV array for SRRIP-like policies
+// uint32_t rrpv[LLC_SETS][LLC_WAYS];
+
+// Example: SHCT (Signature History Counter Table) for SHIP
+// #define SHCT_SIZE (1 << 14)  // 16K entries
+// uint32_t SHCT[SHCT_SIZE];
+
+// ============================================
+// Initialize replacement state
+// Called once at the beginning of simulation
+// ============================================
+void InitReplacementState() {
+    cout << "Initialize your replacement policy" << endl;
+
+    // TODO: Initialize your data structures here
+    // Example:
+    // for (int i = 0; i < LLC_SETS; i++) {
+    //     for (int j = 0; j < LLC_WAYS; j++) {
+    //         rrpv[i][j] = maxRRPV;
+    //     }
+    // }
+}
+
+// ============================================
+// Find replacement victim
+// Called when a cache miss occurs and we need to evict a line
+//
+// Parameters:
+//   cpu        - CPU that initiated the access (0 to NUM_CPUS-1)
+//   set        - Cache set index
+//   current_set- Array of BLOCK structs for this set (size: LLC_WAYS)
+//                Each BLOCK has: valid, dirty, address, full_addr, tag, data, cpu, lru
+//   PC         - Program counter (instruction pointer) that caused the miss
+//   paddr      - Physical address being accessed
+//   type       - Access type: LOAD, RFO, PREFETCH, or WRITEBACK
+//
+// Return value:
+//   Way number (0 to LLC_WAYS-1) of the victim to evict
+//   Return LLC_WAYS to bypass the cache (not fill)
+// ============================================
+uint32_t GetVictimInSet(uint32_t cpu, uint32_t set, const BLOCK *current_set,
+                        uint64_t PC, uint64_t paddr, uint32_t type) {
+    // TODO: Implement your victim selection algorithm
+
+    // Example: Return first invalid line if available
+    for (uint32_t i = 0; i < LLC_WAYS; i++) {
+        if (!current_set[i].valid) {
+            return i;
+        }
+    }
+
+    // Example: Simple LRU-like behavior (return way 0)
+    // Replace this with your algorithm
+    return 0;
+}
+
+// ============================================
+// Update replacement state
+// Called on EVERY cache access (both hits and fills)
+//
+// Parameters:
+//   cpu        - CPU that initiated the access
+//   set        - Cache set index
+//   way        - Cache way that was accessed/filled
+//   paddr      - Physical address being accessed
+//   PC         - Program counter
+//   victim_addr- Address of the evicted line (0 if no eviction or hit)
+//   type       - Access type: LOAD, RFO, PREFETCH, or WRITEBACK
+//   hit        - 1 if this was a cache hit, 0 if cache fill (miss)
+// ============================================
+void UpdateReplacementState(uint32_t cpu, uint32_t set, uint32_t way,
+                            uint64_t paddr, uint64_t PC, uint64_t victim_addr,
+                            uint32_t type, uint8_t hit) {
+    // TODO: Implement your replacement state update algorithm
+
+    // Example: Track whether a prefetch was useful
+    // if (hit && type != WRITEBACK) {
+    //     // Cache hit - update state
+    // } else {
+    //     // Cache miss/fill - insert with initial state
+    // }
+}
+
+// ============================================
+// Print stats (called every 1M instructions)
+// Optional - use for debugging
+// ============================================
+void PrintStats_Heartbeat() {
+    // Optional: Print periodic debugging information
+    // Example:
+    // cout << "Cycle: " << get_cycle_count() << endl;
+}
+
+// ============================================
+// Print final stats (called at end of simulation)
+// Optional - use for reporting
+// ============================================
+void PrintStats() {
+    // Optional: Print final statistics
+    // Example:
+    // cout << "Total instructions: " << get_instr_count(0) << endl;
+}
+
+// ============================================
+// Utility functions available to you:
+//
+// get_cycle_count()      - Returns current simulation cycle
+// get_instr_count(cpu)   - Returns number of instructions retired by cpu
+// get_config_number()    - Returns configuration number (1-6)
+// ============================================

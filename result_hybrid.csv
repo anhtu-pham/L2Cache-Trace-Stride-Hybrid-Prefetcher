@@ -1,0 +1,22 @@
+L2C Prefetcher,Max Counter,Max Number of Offsets,IPC
+hybrid,2,1,0.0880004
+hybrid,2,2,0.0901568
+hybrid,2,3,0.0913678
+hybrid,2,4,0.0930957
+hybrid,2,5,0.0937922
+hybrid,2,6,0.0939315
+hybrid,2,7,0.0946672
+hybrid,3,1,0.0880152
+hybrid,3,2,0.0902097
+hybrid,3,3,0.0914589
+hybrid,3,4,0.0931672
+hybrid,3,5,0.0939621
+hybrid,3,6,0.0941272
+hybrid,3,7,0.0946995
+hybrid,4,1,0.088042
+hybrid,4,2,0.0901808
+hybrid,4,3,0.0913906
+hybrid,4,4,0.0931021
+hybrid,4,5,0.094051
+hybrid,4,6,0.0940312
+hybrid,4,7,0.0947174
