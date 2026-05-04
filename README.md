@@ -30,7 +30,7 @@ Each entry of history memory buffer includes FSM counter to dynamically determin
 
 ### Dynamic Trace-based Prefetcher
 
-For each entry of history memory buffer, dynamic trace-based prefetcher performs prefetching at block offsets in the new accessed page based on the corresponding access instruction's access block offsets in the last accessed page.
+For each entry of history memory buffer, dynamic trace-based prefetcher performs prefetching at block offsets in new accessed page based on corresponding access instruction's access block offsets in the last accessed page.
 
 <p align="center">
     <img src="img/trace_pref.png">
@@ -38,7 +38,7 @@ For each entry of history memory buffer, dynamic trace-based prefetcher performs
 
 ### Dynamic Stride-based Prefetcher
 
-For each entry of history memory buffer, dynamic stride-based prefetcher performs prefetching in strides from the last accessed location of the corresponding access instruction.
+For each entry of history memory buffer, dynamic stride-based prefetcher performs prefetching in strides from the last accessed location of corresponding access instruction.
 
 <p align="center">
     <img src="img/stride_pref.png">
