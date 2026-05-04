@@ -32,6 +32,10 @@ Trace-Stride Hybrid Prefetcher has 3 prefetching modes: (1) dynamic trace-based 
 
 ### Dynamic Stride-based Prefetcher
 
+<p align="center">
+    <img src="img/stride_pref.png">
+</p>
+
 ## Performance Benchmarking
 
 ### Configuration setup for all scenarios
