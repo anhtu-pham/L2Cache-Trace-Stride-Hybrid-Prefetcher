@@ -2,7 +2,7 @@
 
 ## Motivation
 
-Data-intensive applications may include regular, consistent stride access pattern, consecutively inconsistent and irregular access pattern, random or unrecognizable access patterns, or even mixture from these types of access patterns.
+Data-intensive applications may include regular, consistent stride access pattern, consecutively inconsistent and irregular access pattern, random or unrecognizable access patterns, or even complex mixtures from these types of access patterns.
 
 ## Overview
 
@@ -22,7 +22,7 @@ History memory buffer records necessary information for examined instructions to
 
 ### Per-entry FSM Counter
 
-Each entry of history memory buffer includes FSM counter to dynamically determine appropriate prefetching mode and corresponding level of trust depending on memory access pattern that current associated access instruction follows over time.
+Each entry of history memory buffer includes FSM counter to dynamically determine appropriate prefetching mode and corresponding level of trust depending on memory access pattern that currently associated access instruction follows over time.
 
 <p align="center">
     <img src="img/FSM.png">
@@ -30,7 +30,7 @@ Each entry of history memory buffer includes FSM counter to dynamically determin
 
 ### Dynamic Trace-based Prefetcher
 
-For each entry of history memory buffer, dynamic trace-based prefetcher performs prefetching at block offsets in the new accessed page based on the corresponding instruction's access block offsets in the last accessed page.
+For each entry of history memory buffer, dynamic trace-based prefetcher performs prefetching at block offsets in the new accessed page based on the corresponding access instruction's access block offsets in the last accessed page.
 
 <p align="center">
     <img src="img/trace_pref.png">
@@ -38,7 +38,7 @@ For each entry of history memory buffer, dynamic trace-based prefetcher performs
 
 ### Dynamic Stride-based Prefetcher
 
-For each entry of history memory buffer, dynamic stride-based prefetcher performs prefetching in strides from the last accessed location of the corresponding instruction.
+For each entry of history memory buffer, dynamic stride-based prefetcher performs prefetching in strides from the last accessed location of the corresponding access instruction.
 
 <p align="center">
     <img src="img/stride_pref.png">
@@ -55,12 +55,12 @@ Trace-Stride Hybrid Prefetcher's implementation is in champsim_crc2/prefetcher/h
 * Branch predictor: bimodal.
 * Cache replacement: lru_crc2.
 * Core: 1.
-* Trace: mcf_10M.trace.gz (irregular-access, cache-miss-likely, low-IPC workload with baseline IPC of just 0.0864461).
+* Trace: mcf_10M.trace.gz (irregular-access, cache-miss-likely, low-IPC workload with baseline IPC of just about 0.0864461).
 * Number of warmup instructions: 1,000,000.
 * Number of simulation instructions: 10,000,000.
 * Number of signatures for Trace-Stride: 64.
 
-Benchmarking code and results are in benchmarking/ directory.
+Benchmarking code and data results are in benchmarking/ directory.
 
 ### Trace-Stride Hybrid Prefetcher's Performance
 
@@ -68,7 +68,7 @@ Benchmarking code and results are in benchmarking/ directory.
     <img src="img/hybrid_perf.png">
 </p>
 
-## Comparison of different L2C Prefetchers' Performance
+### Comparison of different L2C Prefetchers' Performance
 
 <p align="center">
     <img src="img/comparison.png">
