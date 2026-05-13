@@ -81,3 +81,5 @@ Benchmarking code and data results are in benchmarking/ directory.
 <p align="center">
     <img src="img/comparison.png">
 </p>
+
+Note: IP_Stride refers to IP-based stride prefetcher. KPCP refers to KPC prefetcher.
